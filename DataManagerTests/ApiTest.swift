@@ -11,19 +11,35 @@ import Combine
 @testable import DataManager
 
 class ApiTest: XCTestCase {
+    
+    var expectation: XCTestExpectation!
+    
+    private var sub : AnyCancellable?
+    
     func testGetPosts(){
-        let _ = DataManager.shared.api.getPosts(first: 1, after: "", orderBy: .createdAt)
+        expectation = expectation(description: "Testing GetPosts")
+        expectation.expectedFulfillmentCount = 1
+        
+        getPosts()
+        
+        waitForExpectations(timeout: 5) { (error) in
+            if let error = error {
+                XCTFail("WaitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    func getPosts(){
+        sub = DataManager.shared.api.getPosts(first: 1, after: "", orderBy: .createdAt)
             .sink(receiveCompletion: { complete in
                 switch complete{
                 case .finished:
-                    XCTAssertTrue(false)
+                    self.expectation.fulfill()
                 case .failure(let error):
-                    XCTAssertFalse(true, error.localizedDescription)
+                    XCTAssert(false, error.localizedDescription)
                 }
-                XCTAssertTrue(false)
             }, receiveValue: { value in
-
-                XCTAssertTrue(false)
+                
             })
     }
 }
