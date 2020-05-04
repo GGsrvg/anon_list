@@ -22,7 +22,7 @@ public class Posts: Codable {
 // MARK: - PostsData
 public class PostsData: Codable {
     public var items: [Item]
-    public var cursor: String
+    public var cursor: String?
 
     public init(items: [Item], cursor: String) {
         self.items = items
@@ -34,14 +34,14 @@ public class PostsData: Codable {
 public class Item: Codable {
     public var id: String
     public var replyOnPostID: JSONNull?
-    public var type: ItemType
+    public var type: String
     public var thankedComment: JSONNull?
-    public var status: Status
+    public var status: String
     public var hidingReason: JSONNull?
     public var coordinates: Coordinates?
     public var isCommentable, hasAdultContent, isAuthorHidden, isHidden: Bool
     public var contents: [Content]
-    public var language: Language
+    public var language: String
     public var createdAt, updatedAt: Int
     public var page: JSONNull?
     public var author: Author?
@@ -54,7 +54,7 @@ public class Item: Codable {
         case type, thankedComment, status, hidingReason, coordinates, isCommentable, hasAdultContent, isAuthorHidden, isHidden, contents, language, createdAt, updatedAt, page, author, stats, isMyFavorite
     }
 
-    public init(id: String, replyOnPostID: JSONNull?, type: ItemType, thankedComment: JSONNull?, status: Status, hidingReason: JSONNull?, coordinates: Coordinates?, isCommentable: Bool, hasAdultContent: Bool, isAuthorHidden: Bool, isHidden: Bool, contents: [Content], language: Language, createdAt: Int, updatedAt: Int, page: JSONNull?, author: Author, stats: Stats, isMyFavorite: Bool) {
+    public init(id: String, replyOnPostID: JSONNull?, type: String, thankedComment: JSONNull?, status: String, hidingReason: JSONNull?, coordinates: Coordinates?, isCommentable: Bool, hasAdultContent: Bool, isAuthorHidden: Bool, isHidden: Bool, contents: [Content], language: String, createdAt: Int, updatedAt: Int, page: JSONNull?, author: Author, stats: Stats, isMyFavorite: Bool) {
         self.id = id
         self.replyOnPostID = replyOnPostID
         self.type = type
@@ -81,13 +81,13 @@ public class Item: Codable {
 public class Author: Codable {
     public var id, name: String
     public var banner, photo: Banner?
-    public var gender: Gender
+    public var gender: String
     public var isHidden, isBlocked, isMessagingAllowed: Bool
     public var auth: Auth
     public var tagline: String
     public var data: AuthorData
 
-    public init(id: String, name: String, banner: Banner?, photo: Banner?, gender: Gender, isHidden: Bool, isBlocked: Bool, isMessagingAllowed: Bool, auth: Auth, tagline: String, data: AuthorData) {
+    public init(id: String, name: String, banner: Banner?, photo: Banner?, gender: String, isHidden: Bool, isBlocked: Bool, isMessagingAllowed: Bool, auth: Auth, tagline: String, data: AuthorData) {
         self.id = id
         self.name = name
         self.banner = banner
@@ -174,6 +174,8 @@ public enum BannerType: String, Codable {
     case image = "IMAGE"
     case tags = "TAGS"
     case text = "TEXT"
+    case video = "VIDEO"
+    case audio = "AUDIO"
 }
 
 // MARK: - AuthorData
@@ -181,12 +183,6 @@ public class AuthorData: Codable {
 
     public init() {
     }
-}
-
-public enum Gender: String, Codable {
-    case female = "FEMALE"
-    case male = "MALE"
-    case unset = "UNSET"
 }
 
 // MARK: - Content
@@ -221,17 +217,13 @@ public class ContentData: Codable {
 // MARK: - Coordinates
 public class Coordinates: Codable {
     public var latitude, longitude: Double
-    public var zoom: JSONNull?
+    public var zoom: Int?
 
-    public init(latitude: Double, longitude: Double, zoom: JSONNull?) {
+    public init(latitude: Double, longitude: Double, zoom: Int?) {
         self.latitude = latitude
         self.longitude = longitude
         self.zoom = zoom
     }
-}
-
-public enum Language: String, Codable {
-    case en = "en"
 }
 
 // MARK: - Stats
@@ -259,15 +251,6 @@ public class Comments: Codable {
         self.count = count
         self.my = my
     }
-}
-
-public enum Status: String, Codable {
-    case published = "PUBLISHED"
-}
-
-public enum ItemType: String, Codable {
-    case plain = "PLAIN"
-    case plainCover = "PLAIN_COVER"
 }
 
 // MARK: - ErrorRequest

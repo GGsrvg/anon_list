@@ -17,7 +17,7 @@ final public class Api {
     private init(){}
     
     private func fetch(_ method: String, getParams: String) -> AnyPublisher<Data, Error> {
-        return URLSession.shared.dataTaskPublisher(for: URL(string: "\(url)/\(method)\(getParams)")!)
+        return URLSession.shared.dataTaskPublisher(for: URL(string: "\(url)/\(method)\(getParams.replacingOccurrences(of: "+", with: "%2B").replacingOccurrences(of: "/", with: "%2F"))")!)
             .tryMap({ data, response in
                 guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
                     throw ApiError.unknown
@@ -39,7 +39,7 @@ final public class Api {
         var getParams = "?first=\(first)&orderBy=\(orderBy)"
         
         if !after.isEmpty {
-            getParams.append("&after=\(after.replacingOccurrences(of: "+", with: "%2B"))")
+            getParams.append("&after=\(after)")
         }
         
         return fetch("fs-posts/v1/posts", getParams: getParams)

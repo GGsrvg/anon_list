@@ -14,7 +14,7 @@ class ListViewController: UIViewController {
     
     private var isLoading = false
     
-    private var cursor = ""
+    private var cursor: String? = ""
     
     private var oldDrderBy: OrderBy = .createdAt
     
@@ -78,36 +78,38 @@ class ListViewController: UIViewController {
     
     // MARK: Data
     private func getPosts(orderBy: OrderBy, loading: Bool = true){
-        self.isLoading = true
+        if let cursor = cursor {
         
-        sub = DataManager.shared.api.getPosts(first: 20, after: loading ? cursor : "", orderBy: orderBy)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { complete in
-                switch complete{
-                case .failure(let error):
-                    print("ERROR: \(error)")
-                case .finished:
-                    break
-                }
-                self.isLoading = false
-            }, receiveValue: { data in
-                print("CURSOR = \(data.data.cursor)")
-                
-                if !loading {
-                    self.list.removeAll()
-                    self.tableView.scrollRectToVisible(.zero, animated: true)
-                }
-                
-                for item in data.data.items {
-                    self.list.append(item)
-                }
-                self.tableView.reloadData()
-                
-                self.cursor = data.data.cursor
-                self.isLoading = false
-            })
-        
-        self.oldDrderBy = orderBy
+            self.isLoading = true
+            
+            sub = DataManager.shared.api.getPosts(first: 20, after: loading ? cursor : "", orderBy: orderBy)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { complete in
+                    switch complete{
+                    case .failure(let error):
+                        print("ERROR: \(error)")
+                    case .finished:
+                        break
+                    }
+                    self.isLoading = false
+                }, receiveValue: { data in
+                    
+                    if !loading {
+                        self.list.removeAll()
+                        self.tableView.scrollRectToVisible(.zero, animated: true)
+                    }
+                    
+                    for item in data.data.items {
+                        self.list.append(item)
+                    }
+                    self.tableView.reloadData()
+                    
+                    self.cursor = data.data.cursor
+                    self.isLoading = false
+                })
+            
+            self.oldDrderBy = orderBy
+        }
     }
 }
 

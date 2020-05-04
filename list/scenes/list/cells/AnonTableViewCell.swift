@@ -10,21 +10,59 @@ import UIKit
 
 class AnonTableViewCell: UITableViewCell {
     
-    private let imageViewContent = UIImageView()
+    // MARK: UI Items
+    private let imageViewContent: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 4.0/3.0).isActive = true
+        return imageView
+    }()
+
+    private let additionalStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 12
+        return stack
+    }()
     
-    private let additionalStack = UIStackView()
+    private let mainStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
+    }()
     
-    private let userNameLabel = createLabel(text: "", fontSize: 18, weight: .semibold)
+    private let userNameLabel: UILabel = {
+        let label = createLabel(text: "", fontSize: 18, weight: .semibold)
+        return label
+    }()
     
-    private let textContentLabel = createLabel(text: "", fontSize: 14, weight: .light)
+    private let textContentLabel: UILabel = {
+        let label = createLabel(text: "", fontSize: 14, weight: .light)
+        label.numberOfLines = 6
+        return label
+    }()
     
-    private let likesLabel = createLabel(text: "0", fontSize: 12, weight: .bold)
+    private let likesLabel: UILabel = {
+        let label = createLabel(text: "0", fontSize: 12, weight: .bold)
+        return label
+    }()
     
-    private let viewsLabel = createLabel(text: "0", fontSize: 12, weight: .bold)
+    private let viewsLabel: UILabel = {
+        let label = createLabel(text: "0", fontSize: 12, weight: .bold)
+        return label
+    }()
     
-    private let commentsLabel = createLabel(text: "0", fontSize: 12, weight: .bold)
+    private let commentsLabel: UILabel = {
+        let label = createLabel(text: "0", fontSize: 12, weight: .bold)
+        return label
+    }()
     
-    private let shareLabel = createLabel(text: "0", fontSize: 12, weight: .bold)
+    private let shareLabel: UILabel = {
+        let label = createLabel(text: "0", fontSize: 12, weight: .bold)
+        return label
+    }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -41,25 +79,13 @@ class AnonTableViewCell: UITableViewCell {
                     ItemHStack(shareImage, ShareCount)
          */
         
-        additionalStack.spacing = 12
-        additionalStack.axis = .horizontal
-        
         additionalStack.addArrangedSubview(likesLabel)
         additionalStack.addArrangedSubview(viewsLabel)
         additionalStack.addArrangedSubview(commentsLabel)
         additionalStack.addArrangedSubview(shareLabel)
         additionalStack.addArrangedSubview(UIView())
         
-        imageViewContent.contentMode = .scaleAspectFill
-        imageViewContent.layer.masksToBounds = true
-        imageViewContent.widthAnchor.constraint(equalTo: imageViewContent.heightAnchor, multiplier: 4.0/3.0).isActive = true
-        
-        let mainStack = UIStackView()
-        mainStack.axis = .vertical
-        mainStack.spacing = 10
-        
         mainStack.addArrangedSubview(userNameLabel)
-        textContentLabel.numberOfLines = 6
         mainStack.addArrangedSubview(textContentLabel)
         mainStack.addArrangedSubview(imageViewContent)
         mainStack.addArrangedSubview(additionalStack)
@@ -68,10 +94,10 @@ class AnonTableViewCell: UITableViewCell {
         
         contentView.addSubview(mainStack)
         
-        NSLayoutConstraint.init(item: mainStack, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 8).isActive = true
-        NSLayoutConstraint.init(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: mainStack, attribute: .bottom, multiplier: 1, constant: 8).isActive = true
-        NSLayoutConstraint.init(item: mainStack, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 12).isActive = true
-        NSLayoutConstraint.init(item: contentView, attribute: .trailing, relatedBy: .equal, toItem: mainStack, attribute: .trailing, multiplier: 1, constant: 12).isActive = true
+        self.mainStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12).isActive = true
+        self.mainStack.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8).isActive = true
+        self.mainStack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12).isActive = true
+        self.mainStack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8).isActive = true
     }
     
     required init?(coder: NSCoder) {

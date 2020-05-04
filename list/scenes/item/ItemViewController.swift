@@ -99,30 +99,30 @@ class ItemViewController: UIViewController {
         // add scrollView and set constraint
         self.view.addSubview(self.scrollView)
 
-        self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true;
-        self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true;
-        self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true;
-        self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true;
+        self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
 
         // add view to scrollView and set constraint
         let viewContent = UIView()
         viewContent.translatesAutoresizingMaskIntoConstraints = false
         self.scrollView.addSubview(viewContent)
         
-        viewContent.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0).isActive = true;
-        viewContent.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0).isActive = true;
-        viewContent.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 0).isActive = true;
-        viewContent.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 0).isActive = true;
+        viewContent.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0).isActive = true
+        viewContent.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0).isActive = true
+        viewContent.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 0).isActive = true
+        viewContent.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 0).isActive = true
         // set width constraint to scroll only vertical
-        viewContent.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: 0).isActive = true;
+        viewContent.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor, constant: 0).isActive = true
         
         // add mainStack to viewContent
         viewContent.addSubview(self.mainStack)
         
-        self.mainStack.leadingAnchor.constraint(equalTo: viewContent.leadingAnchor, constant: 12).isActive = true;
-        self.mainStack.topAnchor.constraint(equalTo: viewContent.topAnchor, constant: 8).isActive = true;
-        self.mainStack.trailingAnchor.constraint(equalTo: viewContent.trailingAnchor, constant: -12).isActive = true;
-        self.mainStack.bottomAnchor.constraint(equalTo: viewContent.bottomAnchor, constant: -8).isActive = true;
+        self.mainStack.leadingAnchor.constraint(equalTo: viewContent.leadingAnchor, constant: 12).isActive = true
+        self.mainStack.topAnchor.constraint(equalTo: viewContent.topAnchor, constant: 8).isActive = true
+        self.mainStack.trailingAnchor.constraint(equalTo: viewContent.trailingAnchor, constant: -12).isActive = true
+        self.mainStack.bottomAnchor.constraint(equalTo: viewContent.bottomAnchor, constant: -8).isActive = true
         
         self.additionalStack.addArrangedSubview(self.likesLabel)
         self.additionalStack.addArrangedSubview(self.viewsLabel)
