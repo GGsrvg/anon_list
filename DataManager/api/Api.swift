@@ -35,7 +35,14 @@ final public class Api {
     }
     
      public func getPosts(first: Int, after: String, orderBy: OrderBy) -> AnyPublisher<Posts, Error>  {
-        fetch("fs-posts/v1/posts", getParams: "?first=\(first)&after=\(after)&orderBy=\(orderBy)")
+        
+        var getParams = "?first=\(first)&orderBy=\(orderBy)"
+        
+        if !after.isEmpty {
+            getParams.append("&after=\(after.replacingOccurrences(of: "+", with: "%2B"))")
+        }
+        
+        return fetch("fs-posts/v1/posts", getParams: getParams)
             .decode(type: Posts.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }

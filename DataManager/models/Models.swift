@@ -44,7 +44,7 @@ public class Item: Codable {
     public var language: Language
     public var createdAt, updatedAt: Int
     public var page: JSONNull?
-    public var author: Author
+    public var author: Author?
     public var stats: Stats
     public var isMyFavorite: Bool
 

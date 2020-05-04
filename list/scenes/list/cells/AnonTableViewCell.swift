@@ -9,19 +9,23 @@
 import UIKit
 
 class AnonTableViewCell: UITableViewCell {
-
-    private let userNameLabel = createLabel(text: "", fontSize: 18, weight: .semibold)
-    
-    private let textContentLabel = createLabel(text: "", fontSize: 14, weight: .light)
     
     private let imageViewContent = UIImageView()
     
     private let additionalStack = UIStackView()
     
+    private let userNameLabel = createLabel(text: "", fontSize: 18, weight: .semibold)
+    
+    private let textContentLabel = createLabel(text: "", fontSize: 14, weight: .light)
+    
     private let likesLabel = createLabel(text: "0", fontSize: 12, weight: .bold)
+    
     private let viewsLabel = createLabel(text: "0", fontSize: 12, weight: .bold)
+    
     private let commentsLabel = createLabel(text: "0", fontSize: 12, weight: .bold)
+    
     private let shareLabel = createLabel(text: "0", fontSize: 12, weight: .bold)
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,7 +39,6 @@ class AnonTableViewCell: UITableViewCell {
                     ItemHStack(viewsImage, ViewsCount)
                     ItemHStack(commentsImage, CommentsCount)
                     ItemHStack(shareImage, ShareCount)
-                        
          */
         
         additionalStack.spacing = 12
@@ -47,7 +50,8 @@ class AnonTableViewCell: UITableViewCell {
         additionalStack.addArrangedSubview(shareLabel)
         additionalStack.addArrangedSubview(UIView())
         
-        
+        imageViewContent.contentMode = .scaleAspectFill
+        imageViewContent.layer.masksToBounds = true
         imageViewContent.widthAnchor.constraint(equalTo: imageViewContent.heightAnchor, multiplier: 4.0/3.0).isActive = true
         
         let mainStack = UIStackView()
@@ -55,7 +59,7 @@ class AnonTableViewCell: UITableViewCell {
         mainStack.spacing = 10
         
         mainStack.addArrangedSubview(userNameLabel)
-        textContentLabel.numberOfLines = 0
+        textContentLabel.numberOfLines = 6
         mainStack.addArrangedSubview(textContentLabel)
         mainStack.addArrangedSubview(imageViewContent)
         mainStack.addArrangedSubview(additionalStack)
@@ -106,22 +110,7 @@ class AnonTableViewCell: UITableViewCell {
         self.shareLabel.text = String(shareCount)
     }
     
-}
-
-fileprivate func createAdditionalInfo(count: Int) -> UIStackView {
-    let label = createLabel(text: String(count), fontSize: 12, weight: .light)
-    
-    let hStack = UIStackView()
-    hStack.axis = .horizontal
-    
-    hStack.addArrangedSubview(label)
-    
-    return hStack
-}
-
-fileprivate func createLabel(text: String, fontSize: CGFloat, weight: UIFont.Weight) -> UILabel {
-    let label = UILabel()
-    label.text = text
-    label.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
-    return label
+    func haveImage() -> Bool {
+        return self.imageViewContent.image != nil
+    }
 }

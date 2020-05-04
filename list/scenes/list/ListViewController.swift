@@ -12,9 +12,15 @@ import Combine
 
 class ListViewController: UIViewController {
     
+    private var isLoading = false
+    
+    private var cursor = ""
+    
+    private var oldDrderBy: OrderBy = .createdAt
+    
     private var list: [Item] = []
     
-    var sub : AnyCancellable?
+    private var sub : AnyCancellable?
     
     private lazy var tableView: UITableView = UITableView()
     
@@ -31,9 +37,9 @@ class ListViewController: UIViewController {
         view.addSubview(tableView)
         
         NSLayoutConstraint.init(item: tableView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint.init(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint.init(item: view!, attribute: .bottom, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint.init(item: tableView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint.init(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint.init(item: view!, attribute: .trailing, relatedBy: .equal, toItem: tableView, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
     }
     
     override func viewDidLoad() {
@@ -41,34 +47,68 @@ class ListViewController: UIViewController {
         
         title = "List"
         
-        self.getPosts()
+        let changeSortButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(selectSort))
+
+        navigationItem.rightBarButtonItems = [changeSortButtonItem]
+        
+        self.getPosts(orderBy: .mostPopular)
+    }
+    
+    @objc func selectSort(){
+        let optionMenu = UIAlertController(title: nil, message: "Choose type sort", preferredStyle: .actionSheet)
+            
+        let mostCommentedAction = UIAlertAction(title: "Most commented", style: .default, handler: { _ in self.getPosts(orderBy: .mostCommented, loading: false) })
+        let mostPopularAction = UIAlertAction(title: "Most popular", style: .default, handler: { _ in self.getPosts(orderBy: .mostPopular, loading: false) })
+        let createAtAction = UIAlertAction(title: "Create at", style: .default, handler: { _ in self.getPosts(orderBy: .createdAt, loading: false) })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        optionMenu.addAction(mostCommentedAction)
+        optionMenu.addAction(mostPopularAction)
+        optionMenu.addAction(createAtAction)
+        optionMenu.addAction(cancelAction)
+            
+        self.present(optionMenu, animated: true, completion: nil)
     }
     
     // MARK: Navigation
-    private func goToItem(){
-        let itemViewController = ItemViewController()
+    private func goToItem(_ item: Item){
+        let itemViewController = ItemViewController(item)
         navigationController!.show(itemViewController, sender: nil)
     }
     
-    // MARK: Network
-    private func getPosts(){
-        sub = DataManager.shared.api.getPosts(first: 20, after: "", orderBy: .createdAt)
+    // MARK: Data
+    private func getPosts(orderBy: OrderBy, loading: Bool = true){
+        self.isLoading = true
+        
+        sub = DataManager.shared.api.getPosts(first: 20, after: loading ? cursor : "", orderBy: orderBy)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { complete in
-//                switch complete{
-//                case .finished:
-//                    XCTAssertTrue(false)
-//                case .failure(let error):
-//                    XCTAssertFalse(true, error.localizedDescription)
-//                }
+                switch complete{
+                case .failure(let error):
+                    print("ERROR: \(error)")
+                case .finished:
+                    break
+                }
+                self.isLoading = false
             }, receiveValue: { data in
+                print("CURSOR = \(data.data.cursor)")
+                
+                if !loading {
+                    self.list.removeAll()
+                    self.tableView.scrollRectToVisible(.zero, animated: true)
+                }
+                
                 for item in data.data.items {
                     self.list.append(item)
                 }
                 self.tableView.reloadData()
+                
+                self.cursor = data.data.cursor
+                self.isLoading = false
             })
+        
+        self.oldDrderBy = orderBy
     }
-
 }
 
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -80,23 +120,26 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AnonTableViewCell", for: indexPath) as! AnonTableViewCell
         let item = list[indexPath.row]
         
-        var data: Data? = nil
-        
-        if let path = item.contents.first(where: { $0.type == .image })?.data.extraSmall?.url {
-            let url = URL(string: path)
-            data = try? Data(contentsOf: url!)
-        }
-        
-        
-        cell.setData(userName: String(item.author.name.filter { !" \n\t\r".contains($0) }),
-                     textContent: item.contents.first(where: { $0.type == .text })?.data.value,
-                     imageContent: data == nil ? nil: UIImage(data: data!),
-                     likeCount: item.stats.likes.count ?? 0,
-                     viewsCount: item.stats.views.count ?? 0,
+        cell.setData(userName:      item.author != nil ? String(item.author!.name.filter { !" \n\t\r".contains($0) }) : nil,
+                     textContent:   item.contents.first(where: { $0.type == .text })?.data.value,
+                     imageContent:  nil,
+                     likeCount:     item.stats.likes.count ?? 0,
+                     viewsCount:    item.stats.views.count ?? 0,
                      commentsCount: item.stats.comments.count ?? 0,
-                     shareCount: item.stats.shares.count ?? 0)
+                     shareCount:    item.stats.shares.count ?? 0)
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        self.goToItem(list[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if !isLoading && indexPath.row > list.count - 2 {
+            getPosts(orderBy: oldDrderBy)
+        }
+    }
 }
-
