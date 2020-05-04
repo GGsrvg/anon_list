@@ -36,10 +36,11 @@ class ListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
-        NSLayoutConstraint.init(item: tableView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint.init(item: view!, attribute: .bottom, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint.init(item: tableView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint.init(item: view!, attribute: .trailing, relatedBy: .equal, toItem: tableView, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        
+        self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0).isActive = true
+        self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
     
     override func viewDidLoad() {
@@ -56,17 +57,17 @@ class ListViewController: UIViewController {
     
     @objc func selectSort(){
         let optionMenu = UIAlertController(title: nil, message: "Choose type sort", preferredStyle: .actionSheet)
-            
-        let mostCommentedAction = UIAlertAction(title: "Most commented", style: .default, handler: { _ in self.getPosts(orderBy: .mostCommented, loading: false) })
-        let mostPopularAction = UIAlertAction(title: "Most popular", style: .default, handler: { _ in self.getPosts(orderBy: .mostPopular, loading: false) })
-        let createAtAction = UIAlertAction(title: "Create at", style: .default, handler: { _ in self.getPosts(orderBy: .createdAt, loading: false) })
+
+        let mostCommentedAction = UIAlertAction(title: "Most commented", style: .default, handler: { _ in self.getPosts(orderBy: .mostCommented, additionalLoading: false) })
+        let mostPopularAction = UIAlertAction(title: "Most popular", style: .default, handler: { _ in self.getPosts(orderBy: .mostPopular, additionalLoading: false) })
+        let createAtAction = UIAlertAction(title: "Create at", style: .default, handler: { _ in self.getPosts(orderBy: .createdAt, additionalLoading: false) })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
+
         optionMenu.addAction(mostCommentedAction)
         optionMenu.addAction(mostPopularAction)
         optionMenu.addAction(createAtAction)
         optionMenu.addAction(cancelAction)
-            
+
         self.present(optionMenu, animated: true, completion: nil)
     }
     
@@ -77,12 +78,12 @@ class ListViewController: UIViewController {
     }
     
     // MARK: Data
-    private func getPosts(orderBy: OrderBy, loading: Bool = true){
+    private func getPosts(orderBy: OrderBy, additionalLoading: Bool = true){
         if let cursor = cursor {
         
             self.isLoading = true
             
-            sub = DataManager.shared.api.getPosts(first: 20, after: loading ? cursor : "", orderBy: orderBy)
+            sub = DataManager.shared.api.getPosts(first: 20, after: additionalLoading ? cursor : "", orderBy: orderBy)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { complete in
                     switch complete{
@@ -94,9 +95,8 @@ class ListViewController: UIViewController {
                     self.isLoading = false
                 }, receiveValue: { data in
                     
-                    if !loading {
+                    if !additionalLoading {
                         self.list.removeAll()
-                        self.tableView.scrollRectToVisible(.zero, animated: true)
                     }
                     
                     for item in data.data.items {
@@ -106,6 +106,10 @@ class ListViewController: UIViewController {
                     
                     self.cursor = data.data.cursor
                     self.isLoading = false
+                    
+                    if !additionalLoading {
+                        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                    }
                 })
             
             self.oldDrderBy = orderBy

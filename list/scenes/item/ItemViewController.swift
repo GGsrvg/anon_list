@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import Combine
 import DataManager
+import Dante
 
 class ItemViewController: UIViewController {
 
@@ -36,6 +38,7 @@ class ItemViewController: UIViewController {
     
     private let imageViewContent: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = UIColor.lightGray
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 4.0/3.0).isActive = true
@@ -152,14 +155,9 @@ class ItemViewController: UIViewController {
         commentsLabel.text = String(item.stats.comments.count ?? 0)
         shareLabel.text = String(item.stats.shares.count ?? 0)
         
-        var data: Data? = nil
-
         if let path = item.contents.first(where: { $0.type == .image })?.data.small?.url {
-            let url = URL(string: path)
-            data = try? Data(contentsOf: url!)
+            self.imageViewContent.loadImage(path)
         }
-
-        imageViewContent.image = data == nil ? nil: UIImage(data: data!)
     }
-
+    
 }

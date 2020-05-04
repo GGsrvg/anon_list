@@ -33,17 +33,17 @@ public class PostsData: Codable {
 // MARK: - Item
 public class Item: Codable {
     public var id: String
-    public var replyOnPostID: JSONNull?
+    public var replyOnPostID: String?
     public var type: String
-    public var thankedComment: JSONNull?
+    public var thankedComment: String?
     public var status: String
-    public var hidingReason: JSONNull?
+    public var hidingReason: String?
     public var coordinates: Coordinates?
     public var isCommentable, hasAdultContent, isAuthorHidden, isHidden: Bool
     public var contents: [Content]
     public var language: String
     public var createdAt, updatedAt: Int
-    public var page: JSONNull?
+    public var page: String?
     public var author: Author?
     public var stats: Stats
     public var isMyFavorite: Bool
@@ -54,7 +54,7 @@ public class Item: Codable {
         case type, thankedComment, status, hidingReason, coordinates, isCommentable, hasAdultContent, isAuthorHidden, isHidden, contents, language, createdAt, updatedAt, page, author, stats, isMyFavorite
     }
 
-    public init(id: String, replyOnPostID: JSONNull?, type: String, thankedComment: JSONNull?, status: String, hidingReason: JSONNull?, coordinates: Coordinates?, isCommentable: Bool, hasAdultContent: Bool, isAuthorHidden: Bool, isHidden: Bool, contents: [Content], language: String, createdAt: Int, updatedAt: Int, page: JSONNull?, author: Author, stats: Stats, isMyFavorite: Bool) {
+    public init(id: String, replyOnPostID: String?, type: String, thankedComment: String?, status: String, hidingReason: String?, coordinates: Coordinates?, isCommentable: Bool, hasAdultContent: Bool, isAuthorHidden: Bool, isHidden: Bool, contents: [Content], language: String, createdAt: Int, updatedAt: Int, page: String?, author: Author, stats: Stats, isMyFavorite: Bool) {
         self.id = id
         self.replyOnPostID = replyOnPostID
         self.type = type
@@ -263,31 +263,5 @@ public class ErrorRequest: Codable {
 
     public init(querystringAfter: String) {
         self.querystringAfter = querystringAfter
-    }
-}
-
-// MARK: - Encode/decode helpers
-public class JSONNull: Codable, Hashable {
-
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-        return true
-    }
-
-    public var hashValue: Int {
-        return 0
-    }
-
-    public init() {}
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if !container.decodeNil() {
-            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-        }
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encodeNil()
     }
 }

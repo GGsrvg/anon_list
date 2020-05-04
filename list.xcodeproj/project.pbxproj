@@ -26,6 +26,12 @@
 		5B5AB0D2245EB748005B361C /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5AB0D1245EB748005B361C /* ApiError.swift */; };
 		5B5AB0D4245EBBE2005B361C /* ApiTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5AB0D3245EBBE2005B361C /* ApiTest.swift */; };
 		5B63983D245FDBD200307C31 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B63983C245FDBD200307C31 /* Utils.swift */; };
+		5B63984C246083C000307C31 /* Dante.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B639843246083C000307C31 /* Dante.framework */; };
+		5B639853246083C000307C31 /* DanteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B639852246083C000307C31 /* DanteTests.swift */; };
+		5B639855246083C000307C31 /* Dante.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B639845246083C000307C31 /* Dante.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B639858246083C000307C31 /* Dante.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B639843246083C000307C31 /* Dante.framework */; };
+		5B639859246083C000307C31 /* Dante.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B639843246083C000307C31 /* Dante.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5B639861246083DC00307C31 /* Dante.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B639860246083DC00307C31 /* Dante.swift */; };
 		63F7111E359A8040AA8EF80D /* Pods_DataManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D58FF77A19E98796A58C1A8A /* Pods_DataManager.framework */; };
 		C4FFEE223B05F06655CF2BA0 /* Pods_list.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF2ED29FE31F07A2B27ABB09 /* Pods_list.framework */; };
 /* End PBXBuildFile section */
@@ -52,6 +58,27 @@
 			remoteGlobalIDString = 5B5AB0AA245EA26C005B361C;
 			remoteInfo = DataManager;
 		};
+		5B63984D246083C000307C31 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B42F320245DEF6E00FC48EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B639842246083C000307C31;
+			remoteInfo = Dante;
+		};
+		5B63984F246083C000307C31 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B42F320245DEF6E00FC48EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B42F327245DEF6E00FC48EF;
+			remoteInfo = list;
+		};
+		5B639856246083C000307C31 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B42F320245DEF6E00FC48EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B639842246083C000307C31;
+			remoteInfo = Dante;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +89,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				5B5AB0C1245EA26C005B361C /* DataManager.framework in Embed Frameworks */,
+				5B639859246083C000307C31 /* Dante.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +122,13 @@
 		5B5AB0D1245EB748005B361C /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		5B5AB0D3245EBBE2005B361C /* ApiTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTest.swift; sourceTree = "<group>"; };
 		5B63983C245FDBD200307C31 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		5B639843246083C000307C31 /* Dante.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dante.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B639845246083C000307C31 /* Dante.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dante.h; sourceTree = "<group>"; };
+		5B639846246083C000307C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B63984B246083C000307C31 /* DanteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DanteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B639852246083C000307C31 /* DanteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanteTests.swift; sourceTree = "<group>"; };
+		5B639854246083C000307C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B639860246083DC00307C31 /* Dante.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dante.swift; sourceTree = "<group>"; };
 		81337FFCD8643E5DD0B6A0C5 /* Pods-list.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-list.release.xcconfig"; path = "Target Support Files/Pods-list/Pods-list.release.xcconfig"; sourceTree = "<group>"; };
 		89CDA736CA26D3AB8D0EC3FA /* Pods-DataManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataManager.debug.xcconfig"; path = "Target Support Files/Pods-DataManager/Pods-DataManager.debug.xcconfig"; sourceTree = "<group>"; };
 		B8A65A151F175514AD43E3E2 /* Pods-DataManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataManager.release.xcconfig"; path = "Target Support Files/Pods-DataManager/Pods-DataManager.release.xcconfig"; sourceTree = "<group>"; };
@@ -108,6 +143,7 @@
 			files = (
 				5B5AB0C0245EA26C005B361C /* DataManager.framework in Frameworks */,
 				C4FFEE223B05F06655CF2BA0 /* Pods_list.framework in Frameworks */,
+				5B639858246083C000307C31 /* Dante.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +164,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5B639840246083C000307C31 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B639848246083C000307C31 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B63984C246083C000307C31 /* Dante.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -137,6 +188,8 @@
 				5B42F32A245DEF6E00FC48EF /* list */,
 				5B5AB0AC245EA26C005B361C /* DataManager */,
 				5B5AB0B9245EA26C005B361C /* DataManagerTests */,
+				5B639844246083C000307C31 /* Dante */,
+				5B639851246083C000307C31 /* DanteTests */,
 				5B42F329245DEF6E00FC48EF /* Products */,
 				8CC3300711FDB7503FA6E9E9 /* Pods */,
 				77ED86407E569BCBD64DF2CB /* Frameworks */,
@@ -149,6 +202,8 @@
 				5B42F328245DEF6E00FC48EF /* list.app */,
 				5B5AB0AB245EA26C005B361C /* DataManager.framework */,
 				5B5AB0B3245EA26C005B361C /* DataManagerTests.xctest */,
+				5B639843246083C000307C31 /* Dante.framework */,
+				5B63984B246083C000307C31 /* DanteTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,6 +303,25 @@
 			path = utils;
 			sourceTree = "<group>";
 		};
+		5B639844246083C000307C31 /* Dante */ = {
+			isa = PBXGroup;
+			children = (
+				5B639845246083C000307C31 /* Dante.h */,
+				5B639846246083C000307C31 /* Info.plist */,
+				5B639860246083DC00307C31 /* Dante.swift */,
+			);
+			path = Dante;
+			sourceTree = "<group>";
+		};
+		5B639851246083C000307C31 /* DanteTests */ = {
+			isa = PBXGroup;
+			children = (
+				5B639852246083C000307C31 /* DanteTests.swift */,
+				5B639854246083C000307C31 /* Info.plist */,
+			);
+			path = DanteTests;
+			sourceTree = "<group>";
+		};
 		77ED86407E569BCBD64DF2CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +356,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5B63983E246083C000307C31 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B639855246083C000307C31 /* Dante.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -299,6 +381,7 @@
 			);
 			dependencies = (
 				5B5AB0BF245EA26C005B361C /* PBXTargetDependency */,
+				5B639857246083C000307C31 /* PBXTargetDependency */,
 			);
 			name = list;
 			productName = list;
@@ -344,6 +427,43 @@
 			productReference = 5B5AB0B3245EA26C005B361C /* DataManagerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		5B639842246083C000307C31 /* Dante */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B63985A246083C000307C31 /* Build configuration list for PBXNativeTarget "Dante" */;
+			buildPhases = (
+				5B63983E246083C000307C31 /* Headers */,
+				5B63983F246083C000307C31 /* Sources */,
+				5B639840246083C000307C31 /* Frameworks */,
+				5B639841246083C000307C31 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dante;
+			productName = Dante;
+			productReference = 5B639843246083C000307C31 /* Dante.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5B63984A246083C000307C31 /* DanteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B63985D246083C000307C31 /* Build configuration list for PBXNativeTarget "DanteTests" */;
+			buildPhases = (
+				5B639847246083C000307C31 /* Sources */,
+				5B639848246083C000307C31 /* Frameworks */,
+				5B639849246083C000307C31 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B63984E246083C000307C31 /* PBXTargetDependency */,
+				5B639850246083C000307C31 /* PBXTargetDependency */,
+			);
+			name = DanteTests;
+			productName = DanteTests;
+			productReference = 5B63984B246083C000307C31 /* DanteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -365,6 +485,14 @@
 						CreatedOnToolsVersion = 11.4.1;
 						TestTargetID = 5B42F327245DEF6E00FC48EF;
 					};
+					5B639842246083C000307C31 = {
+						CreatedOnToolsVersion = 11.4.1;
+						LastSwiftMigration = 1140;
+					};
+					5B63984A246083C000307C31 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = 5B42F327245DEF6E00FC48EF;
+					};
 				};
 			};
 			buildConfigurationList = 5B42F323245DEF6E00FC48EF /* Build configuration list for PBXProject "list" */;
@@ -383,6 +511,8 @@
 				5B42F327245DEF6E00FC48EF /* list */,
 				5B5AB0AA245EA26C005B361C /* DataManager */,
 				5B5AB0B2245EA26C005B361C /* DataManagerTests */,
+				5B639842246083C000307C31 /* Dante */,
+				5B63984A246083C000307C31 /* DanteTests */,
 			);
 		};
 /* End PBXProject section */
@@ -405,6 +535,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5B5AB0B1245EA26C005B361C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B639841246083C000307C31 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B639849246083C000307C31 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -516,6 +660,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5B63983F246083C000307C31 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B639861246083DC00307C31 /* Dante.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B639847246083C000307C31 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B639853246083C000307C31 /* DanteTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -533,6 +693,21 @@
 			isa = PBXTargetDependency;
 			target = 5B5AB0AA245EA26C005B361C /* DataManager */;
 			targetProxy = 5B5AB0BE245EA26C005B361C /* PBXContainerItemProxy */;
+		};
+		5B63984E246083C000307C31 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B639842246083C000307C31 /* Dante */;
+			targetProxy = 5B63984D246083C000307C31 /* PBXContainerItemProxy */;
+		};
+		5B639850246083C000307C31 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B42F327245DEF6E00FC48EF /* list */;
+			targetProxy = 5B63984F246083C000307C31 /* PBXContainerItemProxy */;
+		};
+		5B639857246083C000307C31 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B639842246083C000307C31 /* Dante */;
+			targetProxy = 5B639856246083C000307C31 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -807,6 +982,103 @@
 			};
 			name = Release;
 		};
+		5B63985B246083C000307C31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = GUPNP9UD97;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Dante/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggsrvg.Dante;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5B63985C246083C000307C31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = GUPNP9UD97;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Dante/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggsrvg.Dante;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5B63985E246083C000307C31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GUPNP9UD97;
+				INFOPLIST_FILE = DanteTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggsrvg.DanteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/list.app/list";
+			};
+			name = Debug;
+		};
+		5B63985F246083C000307C31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GUPNP9UD97;
+				INFOPLIST_FILE = DanteTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ggsrvg.DanteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/list.app/list";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -842,6 +1114,24 @@
 			buildConfigurations = (
 				5B5AB0C5245EA26C005B361C /* Debug */,
 				5B5AB0C6245EA26C005B361C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B63985A246083C000307C31 /* Build configuration list for PBXNativeTarget "Dante" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B63985B246083C000307C31 /* Debug */,
+				5B63985C246083C000307C31 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B63985D246083C000307C31 /* Build configuration list for PBXNativeTarget "DanteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B63985E246083C000307C31 /* Debug */,
+				5B63985F246083C000307C31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
