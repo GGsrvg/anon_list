@@ -22,7 +22,7 @@ fileprivate func imageLoad(_ imagePath: String, to imageView: UIImageView){
         if let url = URL(string: imagePath) {
             promise(.success(url))
         }
-        promise(.failure(LoadingError.loading(reason: "fail loading image")))
+        promise(.failure(LoadingError.loading(reason: "Url equail nil")))
     })
     .subscribe(on: DispatchQueue.global(qos: .background))
     .tryMap({ url in
@@ -31,11 +31,11 @@ fileprivate func imageLoad(_ imagePath: String, to imageView: UIImageView){
                 return image
             }
         }
-        throw LoadingError.loading(reason: "Image Nil")
+        throw LoadingError.loading(reason: "Data or UIImage equail nil")
     })
     .receive(on: RunLoop.main)
     .sink(receiveCompletion: { error in
-
+        
     }, receiveValue: { image in
         imageView.image = image
     })
